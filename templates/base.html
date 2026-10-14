@@ -1,0 +1,37 @@
+{% load static %}<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}IBC Gestão{% endblock %} · IBC Gestão</title>
+  <link rel="stylesheet" href="{% static 'ibc/css/design-tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'ibc/css/app.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="topbar">
+    <a class="brand" href="{% url 'accounts:home' %}">
+      <img src="{% static 'ibc/img/ibc-logo-oficial.png' %}" alt="Igreja Batista Central" width="64" height="64">
+      <span>IBC Gestão</span>
+    </a>
+    {% if user.is_authenticated %}
+    <nav aria-label="Menu principal">
+      <ul class="nav">
+        <li><a href="{% url 'accounts:home' %}">Início</a></li>
+        {% if perms.accounts.view_user %}<li><a href="{% url 'accounts:user_list' %}">Usuários e perfis</a></li>{% endif %}
+        <li><a href="{% url 'accounts:password_change' %}">Minha senha</a></li>
+        <li>
+          <form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}
+            <button type="submit" class="link-button">Sair</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+    {% endif %}
+  </header>
+  <main id="conteudo" class="container">
+    {% include "partials/messages.html" %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

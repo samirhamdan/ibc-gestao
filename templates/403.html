@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Acesso negado{% endblock %}
+{% block content %}
+<h1>Acesso negado</h1>
+<p>Seu perfil não tem permissão para acessar esta página.</p>
+<p><a href="{% url 'accounts:home' %}">Voltar ao início</a></p>
+{% endblock %}

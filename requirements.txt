@@ -1,0 +1,4 @@
+# Django 5.2 é a versão LTS (suporte até abril de 2028).
+Django>=5.2.18,<5.3
+psycopg[binary]>=3.2.13,<3.3
+python-dotenv>=1.2,<2

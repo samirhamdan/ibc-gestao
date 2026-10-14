@@ -86,7 +86,10 @@ O roadmap prevê **Administrador, Pastor, Líder e Membro**. Faltam respostas:
 - [x] Haverá anotações pastorais sensíveis no MVP?
       **Não.** A PRD (§8) tira conteúdo pastoral sensível da ficha do MVP.
 - [ ] Uma pessoa pode ter mais de um perfil (ex.: Pastor e Administrador)?
+      *Na Sprint 1 o sistema permite. Se a resposta for não, é uma mudança
+      pequena.*
 - [ ] Quem cria usuários e quem muda o perfil de alguém?
+      *Na Sprint 1, só o Administrador.*
 
 ## 6. Recadastramento
 
