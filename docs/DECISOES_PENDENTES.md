@@ -1,8 +1,8 @@
 # Decisões pendentes — Sprint 0
 
 Lista do que precisa ser respondido pela liderança e pela secretaria da IBC
-antes de começar a programar (Sprint 1). Cada resposta vira regra na PRD
-(`docs/PRD_IBC_GESTAO.md`, ainda não escrita).
+antes de começar a programar (Sprint 1). Ela detalha a seção 12 da PRD
+(`docs/PRD_IBC_GESTAO.md`); cada resposta vira regra na PRD.
 
 Marque `[x]` quando decidir e anote a resposta logo abaixo da pergunta.
 
@@ -83,8 +83,8 @@ O roadmap prevê **Administrador, Pastor, Líder e Membro**. Faltam respostas:
       perfil fica para quando os grupos existirem.
 - [ ] O **Membro** terá login no MVP, ou só preenche o formulário de
       recadastramento? (O roadmap diz que enviar o formulário não cria acesso.)
-- [ ] O que é "registro pastoral sensível"? Haverá anotações pastorais no MVP?
-      Se sim, só Pastor vê, e o Administrador não.
+- [x] Haverá anotações pastorais sensíveis no MVP?
+      **Não.** A PRD (§8) tira conteúdo pastoral sensível da ficha do MVP.
 - [ ] Uma pessoa pode ter mais de um perfil (ex.: Pastor e Administrador)?
 - [ ] Quem cria usuários e quem muda o perfil de alguém?
 
@@ -100,8 +100,12 @@ O roadmap prevê **Administrador, Pastor, Líder e Membro**. Faltam respostas:
 - [ ] Pessoas que ainda não estão na base (é uma base nova) usam o mesmo
       formulário? Sugestão: sim, e a secretaria decide se vira cadastro novo
       ou se junta a um existente.
-- [ ] Quais situações a solicitação pode ter? Sugestão: *Enviada*,
-      *Em análise*, *Pendente de correção*, *Aprovada*, *Cancelada*.
+- [ ] A PRD (RF-06) define as situações *Não iniciada*, *Enviada*,
+      *Em análise*, *Pendente de correção*, *Aprovada* e *Cancelada*, mas
+      também diz que a secretaria pode **rejeitar**. Falta decidir: rejeitar
+      é uma situação própria (*Rejeitada*) ou é o mesmo que *Cancelada*?
+      Sugestão: *Rejeitada* separada, porque *Cancelada* é quando a própria
+      pessoa ou a secretaria desiste antes da análise.
 - [ ] Quem avisa a pessoa quando falta corrigir algo, e por qual canal?
 
 ## 7. Privacidade (LGPD)
@@ -132,10 +136,16 @@ O roadmap prevê **Administrador, Pastor, Líder e Membro**. Faltam respostas:
   `#7F9096` (contraste 3,3) na borda dos campos; no tema escuro, botão com
   texto escuro. **Aguardando aprovação**; os tokens ainda não foram alterados.
 - [ ] Haverá tema escuro no MVP? Sugestão: não; só o claro.
+
+## 9. E-mail
+
+- [ ] Haverá serviço de e-mail? A PRD (RF-01) só oferece recuperação de senha
+      se houver. Sem e-mail, quem esquecer a senha depende do Administrador
+      gerar uma nova.
 - [ ] Fonte Inter: hospedar os arquivos no próprio sistema (recomendado pelo
       Design System) ou usar só a fonte do aparelho?
 
-## 9. Infraestrutura (só documentar, sem mexer)
+## 10. Infraestrutura (só documentar, sem mexer)
 
 - [ ] Onde o sistema vai rodar? A VPS atual tem 1,9 GiB de RAM e já roda
       Morumbi Festas, Morumbi 3D e IAGO. Um PostgreSQL a mais pode não caber.

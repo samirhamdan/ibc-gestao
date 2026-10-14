@@ -70,11 +70,23 @@ Código em inglês, interface em português (CLAUDE.md §4).
 
 ## 5. Dados e histórico
 
+Entidades da PRD (§8), por app:
+
+| App | Entidades |
+|---|---|
+| `accounts` | `User`, `Profile` (liga o usuário à `Person`) |
+| `people` | `Person`, `Family`, `FamilyMembership` (se aprovados) |
+| `membership` | `MembershipEvent` |
+| `reregistration` | `ReregistrationRequest` (a PRD chama de `RecadastroRequest`; em inglês para seguir o CLAUDE.md §4) |
+| `institution` | `InstitutionSettings`, `ConsentRecord` |
+| `audit` | `AuditEvent` |
+
 - Pessoa (`Person`) separada de usuário (`User`): nem toda pessoa tem login.
 - Histórico da membresia é uma lista de eventos (`MembershipEvent`) que não
   se apaga; correção vira novo registro com motivo.
-- A situação atual da pessoa é derivada do último evento válido (ou guardada
-  e recalculada pelo serviço na mesma transação).
+- A situação atual da pessoa fica num campo próprio. Um evento só a altera
+  quando houver regra institucional aprovada para isso (PRD RF-05); até lá,
+  a secretaria muda a situação explicitamente, e a mudança é auditada.
 - Recadastramento (`ReregistrationRequest`) guarda o que a pessoa enviou;
   só altera `Person` quando a secretaria aprova.
 - Auditoria registra quem, quando, o quê e quais campos mudaram, sem copiar

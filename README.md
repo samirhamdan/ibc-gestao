@@ -11,6 +11,7 @@ documentação e a identidade visual.
 | Arquivo | Conteúdo |
 |---|---|
 | [`CLAUDE.md`](CLAUDE.md) | Regras permanentes para o desenvolvimento |
+| [`docs/PRD_IBC_GESTAO.md`](docs/PRD_IBC_GESTAO.md) | Requisitos do produto (o que o sistema deve fazer) |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | Plano das sprints do MVP |
 | [`docs/DECISOES_PENDENTES.md`](docs/DECISOES_PENDENTES.md) | Perguntas que a IBC precisa responder antes da Sprint 1 |
 | [`docs/architecture.md`](docs/architecture.md) | Proposta de arquitetura técnica |
@@ -18,8 +19,8 @@ documentação e a identidade visual.
 | [`static/ibc/css/design-tokens.css`](static/ibc/css/design-tokens.css) | Cores, espaçamentos e fontes |
 | [`docs/CHANGELOG.md`](docs/CHANGELOG.md) | Histórico de alterações |
 
-A PRD (`docs/PRD_IBC_GESTAO.md`) ainda não foi escrita; ela será montada a
-partir das respostas em `DECISOES_PENDENTES.md`.
+A PRD é a versão 1.0, para validação. As respostas de
+`DECISOES_PENDENTES.md` completam o que ela deixa em aberto (seção 12).
 
 ## Stack prevista
 

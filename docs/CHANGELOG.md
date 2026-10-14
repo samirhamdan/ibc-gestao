@@ -11,3 +11,6 @@
 - Adicionada a lista de decisões pendentes (`docs/DECISOES_PENDENTES.md`),
   incluindo a revisão de contraste dos tokens.
 - Adicionada a proposta de arquitetura (`docs/architecture.md`).
+- Adicionada a PRD v1.0 (`docs/PRD_IBC_GESTAO.md`), como recebida (só o
+  caminho do roadmap foi corrigido). Arquitetura e decisões pendentes
+  alinhadas a ela.
