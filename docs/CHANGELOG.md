@@ -2,6 +2,25 @@
 
 ## [Não publicado]
 
+### Sprint 1 — Fundação, autenticação e permissões
+
+- Projeto Django 5.2 (LTS) com PostgreSQL, configuração por `.env`
+  (`.env.example` sem segredos reais), fuso `America/Campo_Grande`.
+- Usuário customizado com login por e-mail (sem diferença de maiúsculas).
+- Entrar, sair, trocar senha e recuperar senha por e-mail.
+- Os quatro perfis (Administrador, Pastor, Líder, Membro) definidos em código
+  e sincronizados a cada `migrate`.
+- Login exigido em todas as páginas por padrão.
+- Gestão de usuários pelo Administrador: listar, criar, editar, ativar e
+  desativar, atribuir perfis, definir senha provisória.
+- Senha provisória obriga a troca no próximo acesso.
+- Auditoria básica de criação, alteração, perfis, ativação e senha definida
+  pelo administrador.
+- Comando `criar_usuario` para criar o primeiro administrador.
+- Estilos mínimos com os tokens do Design System (botão e borda dos campos
+  com contraste AA).
+- 39 testes automatizados.
+
 ### Sprint 0 — Preparação
 
 - Estrutura inicial do repositório.

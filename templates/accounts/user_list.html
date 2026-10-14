@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Usuários e perfis{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Usuários e perfis</h1>
+  {% if perms.accounts.add_user %}<a class="btn btn-primary" href="{% url 'accounts:user_create' %}">Novo usuário</a>{% endif %}
+</div>
+{% if page.object_list %}
+<div class="table-wrap" tabindex="0" role="region" aria-label="Lista de usuários (role para os lados no celular)">
+<table class="table">
+  <thead><tr><th scope="col">Nome</th><th scope="col">E-mail</th><th scope="col">Perfis</th><th scope="col">Situação</th><th scope="col"><span class="visually-hidden">Ações</span></th></tr></thead>
+  <tbody>
+  {% for u in page.object_list %}
+  <tr>
+    <td>{{ u.full_name }}</td>
+    <td>{{ u.email }}</td>
+    <td>{{ u.role_names|join:", "|default:"—" }}</td>
+    <td>{% if u.is_active %}<span class="badge badge-success">✓ Ativo</span>{% else %}<span class="badge badge-muted">✕ Inativo</span>{% endif %}</td>
+    <td>
+      {% if perms.accounts.change_user %}<div class="actions">
+      <a href="{% url 'accounts:user_edit' u.pk %}">Editar<span class="visually-hidden"> {{ u.full_name }}</span></a>
+      <a href="{% url 'accounts:user_set_password' u.pk %}">Senha provisória<span class="visually-hidden"> de {{ u.full_name }}</span></a></div>
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% if page.has_other_pages %}
+<nav class="pagination" aria-label="Páginas">
+  {% if page.has_previous %}<a href="?pagina={{ page.previous_page_number }}">Anterior</a>{% endif %}
+  <span>Página {{ page.number }} de {{ page.paginator.num_pages }}</span>
+  {% if page.has_next %}<a href="?pagina={{ page.next_page_number }}">Próxima</a>{% endif %}
+</nav>
+{% endif %}
+{% else %}
+<p class="empty">Nenhum usuário cadastrado.</p>
+{% endif %}
+{% endblock %}

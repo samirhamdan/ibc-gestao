@@ -1,7 +1,8 @@
 # Arquitetura — IBC Gestão
 
-**Situação:** proposta inicial (Sprint 0). Nada aqui foi implementado ainda.
-Revisar depois que as respostas de `DECISOES_PENDENTES.md` chegarem.
+**Situação:** Sprint 1 implementada (contas, perfis, auditoria básica). O
+restante é proposta; revisar quando chegarem as respostas de
+`DECISOES_PENDENTES.md`.
 
 ## 1. Visão geral
 
@@ -23,7 +24,7 @@ ibc-gestao/
 ├── manage.py
 ├── pyproject.toml / requirements*.txt
 ├── .env.example                 # só nomes das variáveis, sem valores reais
-├── config/                      # settings (base, dev, prod), urls, wsgi
+├── config/                      # settings (um arquivo, guiado pelo .env), urls, wsgi
 ├── apps/
 │   ├── accounts/                # usuário customizado, login, perfis
 │   ├── people/                  # pessoa, vínculos familiares
@@ -54,19 +55,41 @@ Código em inglês, interface em português (CLAUDE.md §4).
 - **Views:** autenticação + autorização + chamar serviço + renderizar.
 - **Templates:** só apresentação; nada de regra de negócio.
 
-## 4. Autorização
+## 4. Autorização (implementado na Sprint 1)
 
-- Usuário customizado (`accounts.User`) criado **antes da primeira
-  migration**.
-- Perfis como `Group` do Django com permissões explícitas
-  (`people.view_person`, `membership.add_event`, ...), criados por migration
-  de dados para ficarem iguais em todos os ambientes.
-- Toda view protegida verifica permissão no servidor (mixin/decorator) **e**
-  o escopo do registro (um membro só vê o próprio cadastro). Teste para cada
-  perfil, permitido e negado, incluindo tentativa de trocar o ID na URL.
-- Administrador gerencia usuários e configurações, mas **não** recebe por
-  padrão a permissão de registros pastorais sensíveis.
-- Usuário desativado (`is_active=False`) perde acesso na hora.
+- Usuário customizado (`accounts.User`), com e-mail como login, criado antes
+  da primeira migration. Conta (`User`) é separada de pessoa (`Person`,
+  Sprint 3).
+- **Toda página exige login por padrão** (`LoginRequiredMiddleware`). Só as
+  telas de entrar e recuperar senha são públicas. Um teste percorre todas as
+  rotas e falha se alguma nova nascer aberta.
+- Perfis são grupos do Django. As permissões de cada perfil ficam em
+  `apps/accounts/roles.py`; a cada `migrate` o banco é ajustado para ficar
+  igual ao arquivo, removendo permissões acrescentadas à mão.
+- Cada view protegida declara a permissão (`@permission_required(...,
+  raise_exception=True)`) e os serviços verificam de novo. Sem permissão: 403.
+- O Django Admin não está instalado e não existe superusuário: ambos
+  ignorariam as regras de permissão e auditoria.
+- Desativar uma conta derruba as sessões abertas no próximo clique.
+- Senha criada pelo administrador é provisória: a pessoa só consegue trocar a
+  senha ou sair até criar a própria.
+- Um administrador não pode desativar a própria conta nem tirar o próprio
+  perfil de Administrador (evita ficar sem ninguém para administrar).
+
+Permissões atuais:
+
+| Permissão | Administrador | Pastor | Líder | Membro |
+|---|:-:|:-:|:-:|:-:|
+| Ver a própria conta e trocar a própria senha | ✓ | ✓ | ✓ | ✓ |
+| Ver usuários (`accounts.view_user`) | ✓ | | | |
+| Criar usuários (`accounts.add_user`) | ✓ | | | |
+| Editar, ativar e desativar usuários (`accounts.change_user`) | ✓ | | | |
+| Atribuir perfis (`accounts.assign_roles`) | ✓ | | | |
+| Consultar auditoria (`audit.view_auditevent`, tela na Sprint 5) | ✓ | | | |
+
+Pastor, Líder e Membro ganham permissões quando os dados de membresia
+existirem (Sprint 3 em diante). Ninguém tem permissão de apagar usuário:
+conta se desativa, não se apaga.
 
 ## 5. Dados e histórico
 
@@ -89,8 +112,10 @@ Entidades da PRD (§8), por app:
   a secretaria muda a situação explicitamente, e a mudança é auditada.
 - Recadastramento (`ReregistrationRequest`) guarda o que a pessoa enviou;
   só altera `Person` quando a secretaria aprova.
-- Auditoria registra quem, quando, o quê e quais campos mudaram, sem copiar
-  valores sensíveis.
+- Auditoria (`AuditEvent`, já na Sprint 1) registra quem, quando, o quê e
+  quais campos mudaram, sem copiar valores sensíveis. Registro não se altera
+  nem se apaga pelo sistema. Proteção também no banco (gatilho) fica para a
+  Sprint 5.
 
 ## 6. Configuração e segredos
 
@@ -110,8 +135,9 @@ Entidades da PRD (§8), por app:
 
 ## 8. Testes
 
-- `django.test` / `pytest-django`.
+- Testes do próprio Django (`manage.py test`), contra PostgreSQL.
 - Para cada funcionalidade: permissões positivas e negativas dos perfis,
   entradas inválidas, duplicidades, transições de estado.
 - Teste que detecta migration esquecida (`makemigrations --check`).
+- Teste que percorre todas as rotas e exige login nas não públicas.
 - Somente dados fictícios.

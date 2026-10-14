@@ -1,0 +1,89 @@
+/* IBC Gestão — estilos base (Sprint 1).
+   Só o essencial para as telas de acesso. A biblioteca completa de
+   componentes vem na Sprint 2. Cores, espaços e raios sempre pelos tokens. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body { font-size: var(--ibc-font-size-base); }
+
+a { color: var(--ibc-primary-dark); }
+
+h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 var(--ibc-space-6); }
+h2 { font-size: 1.25rem; margin: 0 0 var(--ibc-space-4); }
+
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: var(--ibc-space-4); top: var(--ibc-space-4); background: var(--ibc-surface); padding: var(--ibc-space-2) var(--ibc-space-4); z-index: 10; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.topbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--ibc-space-4); padding: var(--ibc-space-3) var(--ibc-space-4);
+  background: var(--ibc-surface); border-bottom: 1px solid var(--ibc-border);
+}
+.brand { display: flex; align-items: center; gap: var(--ibc-space-3); font-weight: 700; color: var(--ibc-text); text-decoration: none; }
+/* O arquivo do logotipo é quadrado com margens; 64px mantém a marca legível. */
+.brand img { width: 64px; height: 64px; object-fit: contain; }
+
+.nav { display: flex; flex-wrap: wrap; gap: var(--ibc-space-2) var(--ibc-space-4); list-style: none; margin: 0; padding: 0; align-items: center; }
+.nav a, .link-button { display: inline-block; min-height: 44px; line-height: 44px; }
+.nav form { margin: 0; }
+.link-button { background: none; border: 0; padding: 0; font: inherit; color: var(--ibc-primary-dark); text-decoration: underline; cursor: pointer; }
+
+.container { max-width: 72rem; margin: 0 auto; padding: var(--ibc-space-6) var(--ibc-space-4); }
+
+.card { background: var(--ibc-surface); border: 1px solid var(--ibc-border); border-radius: var(--ibc-radius-card); padding: var(--ibc-space-6); margin-bottom: var(--ibc-space-6); }
+.narrow { max-width: 32rem; margin-inline: auto; }
+
+.page-header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--ibc-space-4); margin-bottom: var(--ibc-space-6); }
+.page-header h1 { margin: 0; }
+
+/* Botão principal usa o tom mais escuro (#02758B): branco sobre #038EA8
+   tem contraste 3,86, abaixo do mínimo 4,5. Ver DECISOES_PENDENTES.md §8. */
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.625rem 1rem; border-radius: var(--ibc-radius-control); border: 1px solid transparent; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+.btn-primary { background: var(--ibc-primary-hover); color: #fff; }
+.btn-primary:hover { background: var(--ibc-primary-dark); }
+.btn-secondary { background: var(--ibc-surface); color: var(--ibc-text); border-color: var(--ibc-text-muted); }
+.form-actions { display: flex; flex-wrap: wrap; gap: var(--ibc-space-3); }
+
+.field { margin-bottom: var(--ibc-space-4); }
+.field label, .field legend { display: block; font-weight: 600; margin-bottom: var(--ibc-space-1); }
+.field fieldset { border: 0; margin: 0; padding: 0; }
+.field fieldset label, .field .check { font-weight: 400; display: flex; gap: var(--ibc-space-2); align-items: center; min-height: 32px; }
+.field input[type="text"], .field input[type="email"], .field input[type="password"] {
+  width: 100%; padding: 0.625rem 0.75rem; font: inherit; color: var(--ibc-text); background: var(--ibc-surface);
+  /* Borda mais escura que --ibc-border: o campo precisa de contraste 3:1. */
+  border: 1px solid var(--ibc-text-muted); border-radius: var(--ibc-radius-control);
+}
+.field ul { list-style: none; padding: 0; margin: 0; }
+.required { font-weight: 400; color: var(--ibc-text-muted); font-size: var(--ibc-font-size-sm); }
+.help { color: var(--ibc-text-muted); font-size: var(--ibc-font-size-sm); margin: var(--ibc-space-1) 0 0; }
+.help ul { padding-left: var(--ibc-space-6); list-style: disc; }
+.error { color: var(--ibc-danger); font-size: var(--ibc-font-size-sm); margin: var(--ibc-space-1) 0 0; font-weight: 600; }
+.field-invalid input { border-color: var(--ibc-danger); border-width: 2px; }
+
+.alert { padding: var(--ibc-space-3) var(--ibc-space-4); border-radius: var(--ibc-radius-control); border-left: 4px solid; margin: 0 0 var(--ibc-space-4); background: var(--ibc-surface); }
+.alert p { margin: 0; }
+.alert-success { border-color: var(--ibc-success); }
+.alert-warning { border-color: var(--ibc-warning); }
+.alert-error { border-color: var(--ibc-danger); }
+.alert-info { border-color: var(--ibc-primary); }
+
+/* position: relative prende os textos ocultos (leitores de tela) dentro da
+   área com rolagem; sem isso eles alargam a página no celular. */
+.table-wrap { position: relative; overflow-x: auto; background: var(--ibc-surface); border: 1px solid var(--ibc-border); border-radius: var(--ibc-radius-card); }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: var(--ibc-space-3) var(--ibc-space-4); border-bottom: 1px solid var(--ibc-border); white-space: nowrap; }
+.table th { font-size: var(--ibc-font-size-sm); color: var(--ibc-text-muted); }
+.actions { display: flex; gap: var(--ibc-space-4); }
+
+.badge { display: inline-block; padding: 0.125rem 0.625rem; border-radius: var(--ibc-radius-pill); font-size: var(--ibc-font-size-sm); font-weight: 600; border: 1px solid; }
+.badge-success { color: var(--ibc-success); }
+.badge-muted { color: var(--ibc-text-muted); }
+
+.details { display: grid; grid-template-columns: max-content 1fr; gap: var(--ibc-space-2) var(--ibc-space-6); margin: 0; }
+.details dt { font-weight: 600; }
+.details dd { margin: 0; }
+
+.pagination { display: flex; gap: var(--ibc-space-4); align-items: center; margin-top: var(--ibc-space-4); }
+.empty { color: var(--ibc-text-muted); }
