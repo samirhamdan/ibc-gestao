@@ -1,0 +1,121 @@
+/* IBC Gestão — Design tokens v1.0
+   Cor principal extraída visualmente do logotipo fornecido.
+   Validar com a equipe de comunicação antes da publicação.
+*/
+:root {
+  color-scheme: light;
+  --ibc-primary: #038EA8;
+  --ibc-primary-hover: #02758B;
+  --ibc-primary-dark: #075B6B;
+  --ibc-primary-soft: #E6F5F8;
+
+  --ibc-text: #18252B;
+  --ibc-text-muted: #5B6B72;
+  --ibc-border: #D9E3E6;
+  --ibc-surface: #FFFFFF;
+  --ibc-background: #F5F8F9;
+
+  --ibc-success: #217346;
+  --ibc-warning: #8A5A00;
+  --ibc-danger: #B42318;
+
+  --ibc-font-sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ibc-font-size-sm: 0.875rem;
+  --ibc-font-size-base: 1rem;
+  --ibc-font-size-lg: 1.125rem;
+  --ibc-line-height: 1.5;
+
+  --ibc-space-1: 0.25rem;
+  --ibc-space-2: 0.5rem;
+  --ibc-space-3: 0.75rem;
+  --ibc-space-4: 1rem;
+  --ibc-space-6: 1.5rem;
+  --ibc-space-8: 2rem;
+  --ibc-space-12: 3rem;
+
+  --ibc-radius-control: 0.5rem;
+  --ibc-radius-card: 0.75rem;
+  --ibc-radius-panel: 1rem;
+  --ibc-radius-pill: 999px;
+
+  --ibc-shadow-popover: 0 8px 24px rgb(24 37 43 / 12%);
+  --ibc-focus-ring: 0 0 0 3px rgb(3 142 168 / 28%);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ibc-text: #E8F0F2;
+  --ibc-text-muted: #B0C0C5;
+  --ibc-border: #34464D;
+  --ibc-surface: #17252A;
+  --ibc-background: #101A1E;
+  --ibc-primary-soft: #123B44;
+  --ibc-primary: #37B5CB;
+  --ibc-primary-hover: #61C9D9;
+  --ibc-primary-dark: #A7EAF3;
+  --ibc-success: #69C18A;
+  --ibc-warning: #F0C36A;
+  --ibc-danger: #FF8178;
+}
+
+/* Base styles */
+html {
+  font-family: var(--ibc-font-sans);
+  line-height: var(--ibc-line-height);
+  color: var(--ibc-text);
+  background: var(--ibc-background);
+}
+
+body {
+  margin: 0;
+  background: var(--ibc-background);
+  color: var(--ibc-text);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ibc-focus-ring);
+}
+
+.ibc-card {
+  background: var(--ibc-surface);
+  border: 1px solid var(--ibc-border);
+  border-radius: var(--ibc-radius-card);
+  padding: var(--ibc-space-6);
+}
+
+.ibc-button-primary {
+  background: var(--ibc-primary);
+  color: #fff;
+  border: 1px solid transparent;
+  border-radius: var(--ibc-radius-control);
+  padding: 0.625rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ibc-button-primary:hover {
+  background: var(--ibc-primary-hover);
+}
+
+.ibc-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--ibc-surface);
+  color: var(--ibc-text);
+  border: 1px solid var(--ibc-border);
+  border-radius: var(--ibc-radius-control);
+  padding: 0.625rem 0.75rem;
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

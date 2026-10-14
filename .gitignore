@@ -1,0 +1,30 @@
+# Segredos e configuração local
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Django
+/staticfiles/
+/media/
+*.sqlite3
+
+# Backups e exportações (podem conter dados de membros)
+*.dump
+*.sql
+*.sql.gz
+*.csv
+*.xlsx
+
+# Editores e sistema
+.idea/
+.vscode/
+.DS_Store
